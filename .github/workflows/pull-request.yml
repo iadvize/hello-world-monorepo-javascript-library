@@ -53,7 +53,8 @@ jobs:
           });
 
           const versionLabelsPresent = labels
-            .filter(label => versionLabels.includes(label.name));
+            .map(label => label.name)
+            .filter(name => versionLabels.includes(name));
 
           if (versionLabelsPresent.length === 1) {
             console.log(`::set-output name=label::${versionLabelsPresent[0]}`)

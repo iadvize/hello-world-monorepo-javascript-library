@@ -9,5 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - fake data
 - fake data
+- fake data
 
 [Unreleased]: https://github.com/iadvize/hello-world-monorepo-javascript-library/compare/v0.0.0...HEAD

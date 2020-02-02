@@ -57,7 +57,7 @@ jobs:
           const labels = pullLabels.map(label => label.name);
           const packageLabels = labels.filter(name => name.includes('packages/'));
 
-          if (pull.assignees.length === 1) {
+          if (packageLabels.length === 1) {
             console.log(`::set-output name=packages::${packageLabels[0]}`);
             return;
           }

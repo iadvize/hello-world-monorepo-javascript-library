@@ -75,6 +75,7 @@ jobs:
       run: |
         cd $DIRECTORY
 
+        npm version $VERSION --allow-same-version
         npm publish --access public --tag $TAG
 
         echo "::set-output name=state::done"

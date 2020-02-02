@@ -70,6 +70,7 @@ jobs:
         PACKAGES: ${{ steps.packages.outputs.packages }}
       run: |
         for PACKAGE in ${PACKAGES//,/ }; do
+          echo $PACKAGE
           (cd $PACKAGE; npm ci)
         done
 
@@ -78,6 +79,7 @@ jobs:
         PACKAGES: ${{ steps.packages.outputs.packages }}
       run: |
         for PACKAGE in ${PACKAGES//,/ }; do
+          echo $PACKAGE
           (cd $PACKAGE; npm run build)
         done
 
@@ -86,7 +88,8 @@ jobs:
         PACKAGES: ${{ steps.packages.outputs.packages }}
       run: |
         for PACKAGE in ${PACKAGES//,/ }; do
-        (cd $PACKAGE; npm run lint:js)
+          echo $PACKAGE
+          (cd $PACKAGE; npm run lint:js)
         done
 
     - name: Test
@@ -94,6 +97,7 @@ jobs:
         PACKAGES: ${{ steps.packages.outputs.packages }}
       run: |
         for PACKAGE in ${PACKAGES//,/ }; do
-        (cd $PACKAGE; npm test test:js)
+          echo $PACKAGE
+          (cd $PACKAGE; npm test test:js)
         done
 

@@ -28,7 +28,7 @@ jobs:
           throw new Error('Should have at least one assignee');
 
   labels:
-    name: 'check labels'
+    name: 'check labels and changelog'
     runs-on: ubuntu-18.04
 
     steps:
@@ -108,7 +108,7 @@ jobs:
 
           const changelogFile = `${process.env.PACKAGE}/CHANGELOG.md`;
 
-          const changelogsNotDeleted = files
+          const fileNotDeletedNames = files
             .filter(file => file.status === 'added' || file.status === 'modified')
             .map(file => file.filename);
 

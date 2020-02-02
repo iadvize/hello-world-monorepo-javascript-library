@@ -74,7 +74,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: v1-npm-${{ github.event.pull_request.head.ref }}-${{ hashFiles(format('{0}/package-lock.json', steps.name.outputs.package) }}
+        key: v1-npm-${{ github.event.pull_request.head.ref }}-${{ hashFiles(format('{0}/package-lock.json', steps.name.outputs.package)) }}
         restore-keys: |
           v1-npm-${{ github.event.pull_request.head.ref }}-
           v1-npm-
@@ -125,7 +125,7 @@ jobs:
             payload: {
               version,
               name,
-              directory:
+              directory,
               ref: context.payload.pull_request.head.sha,
               npmTag: branch,
             },

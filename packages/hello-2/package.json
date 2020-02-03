@@ -1,5 +1,5 @@
 {
-  "name": "@iadvize-oss/hello-1-monorepo",
+  "name": "@iadvize-oss/hello-2-monorepo",
   "version": "0.0.1",
   "description": "Package 2 in hello world monorepo",
   "main": "dist/index.js",

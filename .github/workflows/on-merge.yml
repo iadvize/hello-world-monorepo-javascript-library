@@ -372,7 +372,7 @@ jobs:
       id: extract-changelog
       env:
         PACKAGE: ${{ steps.extract-labels.outputs.package }}
-        VERSION: ${{ format('{0}@{1}', steps.push.outputs.NAME, steps.push.outputs.VERSION) }}
+        VERSION: ${{ steps.push.outputs.VERSION }}
       run: |
         cd $PACKAGE
 

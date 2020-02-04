@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3]
+
 ### Changed
 
-- misc: bump ts-jest from 25.1.0 to 25.2.0 in /packages/hello-2
+-   misc: bump ts-jest from 25.1.0 to 25.2.0 in /packages/hello-2
 
 ## [0.0.2]
 

@@ -14,11 +14,37 @@ jobs:
     steps:
     - uses: actions/checkout@v2-beta
 
+    - name: Check if package label is present
+      id: package-label
+      uses: actions/github-script@0.4.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { data: pullLabels } = await github.issues.listLabelsOnIssue({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.payload.pull_request.number,
+            per_page: 100,
+          });
+
+          const labels = pullLabels.map(label => label.name);
+
+          const packageLabels = labels.filter(name => name.includes('packages/'));
+
+          console.log(`::debug ::${packageLabels.length} matching labels`);
+
+          if (packageLabels.length !== 1) {
+            throw new Error('Pull request should have only one package label');
+          }
+
+          console.log(`::set-output name=label::${packageLabels[0]}`)
+
     - name: Update changelog
       env:
         PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
+        PACKAGE: ${{ steps.package-label.outputs.label }}
       run: |
-        sed -i "/^## \[Unreleased\]/a\\\n- $PULL_REQUEST_TITLE" CHANGELOG.md
+        sed -i "/^## \[Unreleased\]/a\\\n### Changes\\\n- $PULL_REQUEST_TITLE" $PACKAGE/CHANGELOG.md
 
     - name: Git config
       run: |

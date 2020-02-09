@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- misc: bump @types/jest from 25.1.1 to 25.1.2 in /packages/hello-2
+
 ## [0.0.3]
 
 ### Changed

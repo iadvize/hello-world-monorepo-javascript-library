@@ -13,6 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2-beta
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+        token: ${{ secrets.GITHUB_TOKEN_PONEY }}
 
     - name: Check if package label is present
       id: package-label
@@ -52,8 +55,10 @@ jobs:
         git config user.email "github-actions@iadvize.com"
 
     - name: Push
+      env:
+        PACKAGE: ${{ steps.package-label.outputs.label }}
       run: |
-        git add CHANGELOG.md
+        git add $PACKAGE/CHANGELOG.md
         git commit -m "documentation: update changelog for dependency bump"
         git push
 

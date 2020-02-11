@@ -200,14 +200,14 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
         previews: 'ant-man-preview,flash-preview'
         script: |
-          const name = process.env.name;
+          const name = process.env.NAME;
           const version = process.env.VERSION;
           const directory = process.env.DIRECTORY;
 
           const { data: deployment } = await github.repos.createDeployment({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: `v${version}`,
+            ref: `${name}@${version}`,
             environment: 'npm',
             auto_merge: false,
             required_contexts: [],

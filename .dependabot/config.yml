@@ -10,13 +10,3 @@ update_configs:
     default_labels:
       - "patch"
       - "packages/hello-1"
-
-  - package_manager: "javascript"
-    directory: "/packages/hello-2"
-    update_schedule: "live"
-    version_requirement_updates: "increase_versions"
-    commit_message:
-      prefix: "misc"
-    default_labels:
-      - "patch"
-      - "packages/hello-2"

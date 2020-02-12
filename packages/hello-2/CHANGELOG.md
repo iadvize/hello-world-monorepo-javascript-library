@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changes\n- misc: bump rollup-plugin-typescript2 from 0.25.3 to 0.26.0 in /packages/hello-2
+## [0.0.5]
+
+### Changes\\n- misc: bump rollup-plugin-typescript2 from 0.25.3 to 0.26.0 in /packages/hello-2
 
 ## [0.0.4]
 

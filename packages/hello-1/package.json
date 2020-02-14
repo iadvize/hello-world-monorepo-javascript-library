@@ -1,6 +1,6 @@
 {
   "name": "@iadvize-oss/hello-1-monorepo",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Package 1 in hello world monorepo",
   "main": "dist/index.js",
   "module": "esm/index.js",

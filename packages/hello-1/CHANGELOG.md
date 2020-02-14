@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4]
+
 ### Changed
 
-- misc: bump rollup from 1.31.0 to 1.31.1 in /packages/hello-1
+-   misc: bump rollup from 1.31.0 to 1.31.1 in /packages/hello-1
 
 ## [0.1.3]
 

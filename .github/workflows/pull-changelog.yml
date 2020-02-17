@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Check if version label is present
-      id: version
+      id: labels
       uses: actions/github-script@0.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -23,31 +23,44 @@ jobs:
             'major',
           ];
 
-          const { data: labels } = await github.issues.listLabelsOnIssue({
+          const { data: pullLabels } = await github.issues.listLabelsOnIssue({
             owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: context.payload.pull_request.number,
             per_page: 100,
           });
 
-          const versionLabelsPresent = labels
-            .map(label => label.name)
-            .filter(name => versionLabels.includes(name));
+          const labels = pullLabels.map(label => label.name);
 
-          if (versionLabelsPresent.length === 1) {
-            console.log(`::set-output name=label::${versionLabelsPresent[0]}`)
-            return;
-          }
+          const versionLabelsPresent = labels
+            .filter(name => versionLabels.includes(name));
 
           console.log(`::debug ::${versionLabelsPresent.length} matching labels`);
 
-          throw new Error('Should have one and only one of no-release, patch, minor, major labels');
+          if (versionLabelsPresent.length !== 1) {
+            throw new Error('Should have one and only one of no-release, patch, minor, major labels');
+          }
+
+          const versionLabel = versionLabelsPresent[0];
+          console.log(`::set-output name=version-label::${versionLabel}`)
+
+          const packageLabels = labels.filter(name => name.includes('packages/'));
+
+          if (versionLabel === 'no-release') {
+            return;
+          }
+
+          if (packageLabels.length !== 1) {
+            throw new Error('Pull request should have one package label');
+          }
+
+          console.log(`::set-output name=package::${packageLabels[0]}`)
 
     - name: Fail if no changelog change when needed
-      if: steps.version.outputs.label != 'no-release'
+      if: steps.labels.outputs.version-label != 'no-release'
       uses: actions/github-script@0.4.0
       env:
-        PACKAGE: ${{ steps.package-label.outputs.label }}
+        PACKAGE: ${{ steps.labels.outputs.package }}
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |

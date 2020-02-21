@@ -10,3 +10,6 @@ update_configs:
     default_labels:
       - "patch"
       - "packages/hello-1"
+    allowed_updates:
+      - match:
+          dependency_name: "nothing"

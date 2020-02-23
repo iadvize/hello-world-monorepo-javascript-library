@@ -8,8 +8,12 @@ update_configs:
     commit_message:
       prefix: "misc"
     default_labels:
-      - "patch"
+      - "no-release"
       - "packages/hello-1"
     allowed_updates:
       - match:
           dependency_name: "nothing"
+    automerged_updates:
+      - match:
+          dependency_type: "development"
+          update_type: "in_range"

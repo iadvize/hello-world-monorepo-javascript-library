@@ -135,10 +135,10 @@ jobs:
           const versionLabelsNames = Object.keys(versionLabels);
 
           const labels = context.payload.pull_request.labels
-            .map(label => label.name);
+            .map(label => label);
 
           const versionLabelsPresent = labels
-            .filter(label => versionLabelsNames.includes(label));
+            .filter(label => versionLabelsNames.includes(label.name));
 
           console.log(`::debug ::${versionLabelsPresent.length} matching version labels`);
 

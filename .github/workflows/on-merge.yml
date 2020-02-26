@@ -212,7 +212,12 @@ jobs:
 
     - name: Bumb beta version
       if: steps.extract-labels.outputs.versionBump == 'beta'
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        PACKAGE: ${{ steps.extract-labels.outputs.package }}
       run: |
+        cd $PACKAGE
+
         npm version prerelease --preid=beta
 
     - name: Push on master

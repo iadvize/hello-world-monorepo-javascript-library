@@ -8,7 +8,7 @@ update_configs:
     commit_message:
       prefix: "misc"
     default_labels:
-      - "no-release"
+      - "ActionL no bump"
       - "packages/hello-1"
     allowed_updates:
       - match:

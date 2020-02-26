@@ -17,10 +17,10 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const versionLabels = [
-            'no-release',
-            'patch',
-            'minor',
-            'major',
+            'Action: no bump',
+            'Action: patch bump',
+            'Action: minor bump',
+            'Action: major bump',
           ];
 
           const { data: pullLabels } = await github.issues.listLabelsOnIssue({
@@ -46,7 +46,7 @@ jobs:
 
           const packageLabels = labels.filter(name => name.includes('packages/'));
 
-          if (versionLabel === 'no-release') {
+          if (versionLabel === 'Action: no bump') {
             return;
           }
 

@@ -168,7 +168,7 @@ jobs:
             throw new Error('Pull request is not labeled with packages, should not be here');
           }
 
-          console.log(`::set-output name=package::${packageLabels[0]}`)
+          console.log(`::set-output name=package::${packageLabels[0].name}`)
 
     - uses: actions/checkout@v2-beta
       with:

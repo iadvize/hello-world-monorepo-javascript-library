@@ -156,7 +156,7 @@ jobs:
 
           // package
 
-          const packageLabels = labels.filter(name => name.includes('packages/'));
+          const packageLabels = labels.filter(label => label.name.includes('packages/'));
 
           console.log(`::debug ::${packageLabels.length} matching package labels`);
 

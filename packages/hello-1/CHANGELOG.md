@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 -   misc: bump typescript from 3.7.5 to 3.8.2 in /packages/hello-1
--   misc: bump @types/jest from 25.1.2 to 25.1.3 in /packages/hello-1
 
 ## [0.1.5]
 

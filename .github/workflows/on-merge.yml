@@ -109,7 +109,7 @@ jobs:
     if: >
       github.event.pull_request.merged == true
       && contains(join(github.event.pull_request.labels.*.name), 'packages/')
-      && !(
+      && (
           contains(github.event.pull_request.labels.*.name, 'Action: patch bump')
         || contains(github.event.pull_request.labels.*.name, 'Action: minor bump')
         || contains(github.event.pull_request.labels.*.name, 'Action: major bump')

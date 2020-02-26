@@ -57,7 +57,8 @@ jobs:
           console.log(`::set-output name=package::${packageLabels[0]}`)
 
     - name: Fail if no changelog change when needed
-      if: steps.labels.outputs.version-label != 'no-release'
+      if: >
+        steps.labels.outputs.version-label != 'Action: no bump'
       uses: actions/github-script@0.4.0
       env:
         PACKAGE: ${{ steps.labels.outputs.package }}

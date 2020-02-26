@@ -222,7 +222,11 @@ jobs:
 
     - name: Push on master
       id: push
+      env:
+        PACKAGE: ${{ steps.extract-labels.outputs.package }}
       run: |
+        cd $PACKAGE
+
         git push
         git push --tags
 

@@ -99,7 +99,7 @@ jobs:
         git commit -m "documentation($NAME): generate new documentation"
         git push origin gh-pages
 
-  publish-latest:
+  publish:
     name: 'create version and deploy'
     runs-on: ubuntu-18.04
 
@@ -172,7 +172,7 @@ jobs:
 
     - uses: actions/checkout@v2-beta
       with:
-        ref: master
+        ref: mastpackager
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
 
     - name: Git config
@@ -186,7 +186,7 @@ jobs:
 
     - name: Install
       env:
-        PACKAGE: ${{ steps.extract-labels.outputs.versionBump }}
+        PACKAGE: ${{ steps.extract-labels.outputs.package }}
       run: |
         cd $PACKAGE
 
@@ -196,8 +196,8 @@ jobs:
       if: steps.extract-version-label.outputs.versionBump != 'beta'
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        BUMP_TYPE: ${{ steps.extract-labels.outputs.label }}
-        PACKAGE: ${{ steps.extract-labels.outputs.versionBump }}
+        BUMP_TYPE: ${{ steps.extract-labels.outputs.versionBump }}
+        PACKAGE: ${{ steps.extract-labels.outputs.package }}
       run: |
         cd $PACKAGE
 
@@ -237,14 +237,18 @@ jobs:
         REF: ${{ steps.push.outputs.ref }}
         VERSION: ${{ steps.push.outputs.VERSION }}
         NAME: ${{ steps.push.outputs.NAME }}
-        DIRECTORY: ${{ steps.extract-labels.outputs.versionBump }}
+        VERSION_BUMP: ${{ steps.extract-labels.outputs.versionBump }}
+        DIRECTORY: ${{ steps.extract-labels.outputs.package }}
       with:
         github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
         previews: 'ant-man-preview,flash-preview'
         script: |
+          const ref = process.env.REF;
           const name = process.env.NAME;
           const version = process.env.VERSION;
           const directory = process.env.DIRECTORY;
+
+          const npmTag = process.env.VERSION_BUMP === 'beta' ? 'beta' : 'latest';
 
           const { data: deployment } = await github.repos.createDeployment({
             owner: context.repo.owner,
@@ -257,8 +261,8 @@ jobs:
               version,
               name,
               directory,
-              ref: process.env.REF,
-              npmTag: 'latest',
+              npmTag,
+              ref,
             },
             description: `Deploy ${name}@${version} on npm`,
             production_environment: true,
@@ -268,7 +272,7 @@ jobs:
       id: extract-changelog
       if: steps.extract-version-label.outputs.versionBump != 'beta'
       env:
-        PACKAGE: ${{ steps.extract-labels.outputs.versionBump }}
+        PACKAGE: ${{ steps.extract-labels.outputs.package }}
         VERSION: ${{ steps.push.outputs.VERSION }}
       run: |
         cd $PACKAGE

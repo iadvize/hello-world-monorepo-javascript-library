@@ -18,6 +18,7 @@ jobs:
         script: |
           const versionLabels = [
             'Action: no bump',
+            'Action: beta bump',
             'Action: patch bump',
             'Action: minor bump',
             'Action: major bump',
@@ -38,7 +39,7 @@ jobs:
           console.log(`::debug ::${versionLabelsPresent.length} matching labels`);
 
           if (versionLabelsPresent.length !== 1) {
-            throw new Error('Should have one and only one of no-release, patch, minor, major labels');
+            throw new Error('Should have one and only one version bump label');
           }
 
           const versionLabel = versionLabelsPresent[0];

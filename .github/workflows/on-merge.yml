@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Extract package label
       id: name
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
@@ -37,7 +37,7 @@ jobs:
 
           throw new Error('Pull request is not labeled with packages, should not be here');
 
-    - uses: actions/checkout@v2-beta
+    - uses: actions/checkout@v2
       with:
         ref: master
         token: ${{ secrets.TOKEN_REPO_WRITE }}
@@ -119,7 +119,7 @@ jobs:
     steps:
     - name: Extract version label
       id: extract-labels
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
@@ -170,7 +170,7 @@ jobs:
 
           console.log(`::set-output name=package::${packageLabels[0].name}`)
 
-    - uses: actions/checkout@v2-beta
+    - uses: actions/checkout@v2
       with:
         ref: master
         token: ${{ secrets.TOKEN_REPO_WRITE }}
@@ -243,7 +243,7 @@ jobs:
 
     - name: Create deployment
       id: deployment
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@v2
       env:
         REF: ${{ steps.push.outputs.ref }}
         VERSION: ${{ steps.push.outputs.VERSION }}
@@ -299,7 +299,7 @@ jobs:
 
     - name: Create Release
       if: steps.extract-labels.outputs.versionBump != 'beta'
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@v2
       env:
         NAME: ${{ steps.push.outputs.NAME }}
         VERSION: ${{ steps.push.outputs.version }}

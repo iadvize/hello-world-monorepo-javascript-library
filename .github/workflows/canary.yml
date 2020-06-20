@@ -20,7 +20,7 @@ jobs:
       id: name
       uses: actions/github-script@0.4.0
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+        github-token: ${{ secrets.TOKEN_REPO_WRITE }}
         previews: 'ant-man-preview,flash-preview'
         script: |
           const { data: pullLabels } = await github.issues.listLabelsOnIssue({

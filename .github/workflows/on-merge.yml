@@ -40,7 +40,7 @@ jobs:
     - uses: actions/checkout@v2-beta
       with:
         ref: master
-        token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+        token: ${{ secrets.TOKEN_REPO_WRITE }}
 
     - name: Git config
       run: |
@@ -173,7 +173,7 @@ jobs:
     - uses: actions/checkout@v2-beta
       with:
         ref: master
-        token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+        token: ${{ secrets.TOKEN_REPO_WRITE }}
 
     - name: Git config
       run: |
@@ -249,7 +249,7 @@ jobs:
         VERSION_BUMP: ${{ steps.extract-labels.outputs.versionBump }}
         DIRECTORY: ${{ steps.extract-labels.outputs.package }}
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+        github-token: ${{ secrets.TOKEN_REPO_WRITE }}
         previews: 'ant-man-preview,flash-preview'
         script: |
           const ref = process.env.REF;

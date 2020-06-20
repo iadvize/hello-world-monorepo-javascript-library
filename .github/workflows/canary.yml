@@ -14,11 +14,11 @@ jobs:
     if: contains(join(github.event.pull_request.labels.*.name), 'packages/')
 
     steps:
-    - uses: actions/checkout@v2-beta
+    - uses: actions/checkout@v2
 
     - name: Extract package name
       id: name
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@v2
       with:
         github-token: ${{ secrets.TOKEN_REPO_WRITE }}
         previews: 'ant-man-preview,flash-preview'
@@ -73,7 +73,7 @@ jobs:
         node-verion: '12.x'
 
     - name: Cache npm cache
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
         path: ~/.npm
         key: v1-npm-${{ github.event.pull_request.head.ref }}-${{ hashFiles(format('{0}/package-lock.json', steps.name.outputs.package)) }}
@@ -102,7 +102,7 @@ jobs:
 
     - name: Create deployment
       id: deployment
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@v2
       env:
         NAME: ${{ steps.compute-version.outputs.name }}
         VERSION: ${{ steps.compute-version.outputs.version }}

@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v2-beta
+    - uses: actions/checkout@v2
 
     - uses: actions/setup-node@v1
       with:
         node-verion: '12.x'
 
     - name: Cache npm cache
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
         path: ~/.npm
         key: v1-npm-${{ github.ref }}-${{ hashFiles('**/package-lock.json') }}
@@ -36,7 +36,7 @@ jobs:
 
     - name: List pull packages
       id: packages
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@v2
       env:
         PACKAGES_PUSH: ${{ steps.all-packages.outputs.packages }}
       with:
